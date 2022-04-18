@@ -6,6 +6,7 @@ int main()
 {
     int yes = 0;
     int no = 0;
+    int voted = 0;
     int user_ID[] = {123,456,789};
     int user_password[] = {321,654,987};
     int user_ID_input[] = {0,0,0};
@@ -16,7 +17,18 @@ int main()
         scanf("%d", &user_ID_input[i]);
         printf("Please enter your password: ");
         scanf("%d", &user_password_input[i]);
-        if((user_ID_input[i]==123 && user_password_input[i]==321) || (user_ID_input[i]==456 && user_password_input[i]==654) || (user_ID_input[i]==789 && user_password_input[i]==987)){
+        if(i>0){
+            for(int j=0; j<i; j++){
+                if(user_ID_input[i] == user_ID_input[j]){
+                    printf("You have already logged in \n");
+                    voted = 1;
+                }
+                else{
+                    voted = 0;
+                }
+            }
+        }
+        if(((user_ID_input[i]==123 && user_password_input[i]==321) || (user_ID_input[i]==456 && user_password_input[i]==654) || (user_ID_input[i]==789 && user_password_input[i]==987))&&voted==0){
             printf("Enter your vote 1 or 0 as yes or no respectively: ");
             scanf("%d", &vote[i]);
             if(vote[i] == 1){
@@ -26,11 +38,13 @@ int main()
                 no = no+1;
             }
             if(vote[i] != 0 && vote[i] != 1){
-                return printf("Invalid vote. Please try again.");
+                return printf("Invalid vote. \n");
             }
         }
         else{
-            printf("Your ID or password is wrong. \n");
+            if(voted == 0){
+                printf("Your ID or password is wrong. \n");
+            }
         }
     }
     
@@ -45,6 +59,12 @@ int main()
         printf("Votes for No = %d\n",no);
         printf("The result of voting is NO");
         return 0;
+    }
+    if (no==yes){
+        printf("Votes for Yes = %d\n",yes);
+        printf("Votes for No = %d\n",no);
+        printf("The result of voting is DRAW");
+        return 0; 
     }
  
 }
