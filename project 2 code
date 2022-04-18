@@ -1,0 +1,50 @@
+#include "string.h"
+#include "stdbool.h"
+#include "stdio.h"
+
+int main()
+{
+    int yes = 0;
+    int no = 0;
+    int user_ID[] = {123,456,789};
+    int user_password[] = {321,654,987};
+    int user_ID_input[] = {0,0,0};
+    int user_password_input[] = {0,0,0};
+    int vote[] = {0,0,0};
+    for(int i = 0; i < (sizeof(user_ID)/sizeof(user_ID[0])); ++i){
+        printf("Please enter your ID: ");
+        scanf("%d", &user_ID_input[i]);
+        printf("Please enter your password: ");
+        scanf("%d", &user_password_input[i]);
+        if((user_ID_input[i]==123 && user_password_input[i]==321) || (user_ID_input[i]==456 && user_password_input[i]==654) || (user_ID_input[i]==789 && user_password_input[i]==987)){
+            printf("Enter your vote 1 or 0 as yes or no respectively: ");
+            scanf("%d", &vote[i]);
+            if(vote[i] == 1){
+                yes = yes+1;
+            }
+            if(vote[i] == 0){
+                no = no+1;
+            }
+            if(vote[i] != 0 && vote[i] != 1){
+                return printf("Invalid vote. Please try again.");
+            }
+        }
+        else{
+            printf("Your ID or password is wrong. \n");
+        }
+    }
+    
+    if(yes>no){
+        printf("Votes for Yes = %d\n",yes);
+        printf("Votes for No = %d\n",no);
+        printf("The result of voting is YES");
+        return 0;
+    }
+    if(no>yes){
+        printf("Votes for Yes = %d\n",yes);
+        printf("Votes for No = %d\n",no);
+        printf("The result of voting is NO");
+        return 0;
+    }
+ 
+}
