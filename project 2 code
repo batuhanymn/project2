@@ -6,6 +6,7 @@ int main()
 {
     int yes = 0;
     int no = 0;
+    int abstain = 0;
     int voted = 0;
     int user_ID[] = {123,456,789};
     int user_password[] = {321,654,987};
@@ -29,15 +30,18 @@ int main()
             }
         }
         if(((user_ID_input[i]==123 && user_password_input[i]==321) || (user_ID_input[i]==456 && user_password_input[i]==654) || (user_ID_input[i]==789 && user_password_input[i]==987))&&voted==0){
-            printf("Enter your vote 1 or 0 as yes or no respectively: ");
+            printf("Enter your vote 1 or 0 as yes or no respectively.\n If you want to stay abstain, vote 2: ");
             scanf("%d", &vote[i]);
+            if(vote[i] == 2){
+                abstain = abstain+1;
+            }
             if(vote[i] == 1){
                 yes = yes+1;
             }
             if(vote[i] == 0){
                 no = no+1;
             }
-            if(vote[i] != 0 && vote[i] != 1){
+            if(vote[i] != 0 && vote[i] != 1 && vote[i] != 2){
                 return printf("Invalid vote. \n");
             }
         }
@@ -60,10 +64,16 @@ int main()
         printf("The result of voting is NO");
         return 0;
     }
-    if (no==yes){
+    if (no==yes && no != 0 && yes !=0){
         printf("Votes for Yes = %d\n",yes);
         printf("Votes for No = %d\n",no);
         printf("The result of voting is DRAW");
+        return 0; 
+    }
+    if (no == 0 && yes == 0 && abstain > yes && abstain > no){
+        printf("Votes for Yes = %d\n",yes);
+        printf("Votes for No = %d\n",no);
+        printf("The result of voting is ABSTAIN");
         return 0; 
     }
  
