@@ -58,6 +58,14 @@ int main()
             if(vote[i] != 0 && vote[i] != 1 && vote[i] != 2){
                 return printf("Invalid vote. \n");
             }
+            if(yes>(sizeof(user_ID)/sizeof(user_ID[0]))/2){
+            	printf("The result of voting is YES, because of the majority.");
+            	return 0;
+			}
+			if(no>(sizeof(user_ID)/sizeof(user_ID[0]))/2){
+				printf("The result of voting is NO, because of the majority.");
+				return 0;
+			}
         }
         else{
             if(voted == 0){
