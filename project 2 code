@@ -8,14 +8,15 @@ int main()
     int no = 0;
     int abstain = 0;
     int voted = 0;
-    int user_ID[] = {123,456,789};
+    int pass_change;
+    long int user_ID[] = {20191706008,20191706020,20191706022};
     int user_password[] = {321,654,987};
-    int user_ID_input[] = {0,0,0};
+    long int user_ID_input[] = {0,0,0};
     int user_password_input[] = {0,0,0};
     int vote[] = {0,0,0};
     for(int i = 0; i < (sizeof(user_ID)/sizeof(user_ID[0])); ++i){
         printf("Please enter your ID: ");
-        scanf("%d", &user_ID_input[i]);
+        scanf("%ld", &user_ID_input[i]);
         printf("Please enter your password: ");
         scanf("%d", &user_password_input[i]);
         if(i>0){
@@ -29,8 +30,14 @@ int main()
                 }
             }
         }
-        if(((user_ID_input[i]==123 && user_password_input[i]==321) || (user_ID_input[i]==456 && user_password_input[i]==654) || (user_ID_input[i]==789 && user_password_input[i]==987))&&voted==0){
-            printf("Enter your vote 1 or 0 as yes or no respectively.\n If you want to stay abstain, vote 2: ");
+        if(((user_ID_input[i]==user_ID[0] && user_password_input[i]==user_password[0]) || (user_ID_input[i]==user_ID[1] && user_password_input[i]==user_password[1]) || (user_ID_input[i]==user_ID[2] && user_password_input[i]==user_password[2]))&&voted==0){
+            printf("Do you want to change your password? \n");
+            scanf("%d", &pass_change);
+            if(pass_change == 1){
+                printf("Please enter your new password: \n");
+                scanf("%d", &user_password[i]);
+            }
+            printf("Enter your vote 1 or 0 as yes or no respectively.\nIf you want to stay abstain, vote 2: ");
             scanf("%d", &vote[i]);
             if(vote[i] == 2){
                 abstain = abstain+1;
