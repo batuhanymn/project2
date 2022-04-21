@@ -1,9 +1,14 @@
 #include "string.h"
 #include "stdbool.h"
 #include "stdio.h"
+#include <stdlib.h>
 
 int main()
 {
+	FILE *vt;
+	FILE *ps;
+	vt = fopen("votes.txt", "w");
+	ps = fopen("passwords.txt","w");
     int yes = 0;
     int no = 0;
     int abstain = 0;
@@ -37,6 +42,7 @@ int main()
             if(pass_change == 1){
                 printf("Please enter your new password: \n");
                 scanf("%d", &user_password[i]);
+                fprintf(ps, "%d\n", user_password[i]);
             }
             printf("Enter your vote 1 or 0 as yes or no respectively.\nIf you want to stay abstain, vote 2: ");
             scanf("%d", &vote[i]);
@@ -46,6 +52,8 @@ int main()
                 printf("Enter your vote 1 or 0 as yes or no respectively.\nIf you want to stay abstain, vote 2: ");
                 scanf("%d", &vote[i]);
             }
+            fprintf(vt, "%d\n", vote[i]);
+            getch();
             if(vote[i] == 2){
                 abstain = abstain+1;
             }
@@ -59,13 +67,13 @@ int main()
                 return printf("Invalid vote. \n");
             }
             if(yes>(sizeof(user_ID)/sizeof(user_ID[0]))/2){
-            	printf("The result of voting is YES, because of the majority.");
+            	printf("The result of voting is YES. \n");
 				printf("Votes for Yes = %d\n",yes);
         		printf("Votes for No = %d\n",no);
             	return 0;
 			}
 			if(no>(sizeof(user_ID)/sizeof(user_ID[0]))/2){
-				printf("The result of voting is NO, because of the majority.");
+				printf("The result of voting is NO. \n");
 				printf("Votes for Yes = %d\n",yes);
         		printf("Votes for No = %d\n",no);
 				return 0;
@@ -77,12 +85,8 @@ int main()
             }
         }
     }
-    FILE *vt;
-    vt = fopen("votes.txt", "w");
-    fprintf(vt,"Yes: %d\n", yes);
-    fprintf(vt,"No: %d\n", no);
-    fprintf(vt,"Abstain: %d\n", abstain);
     fclose(vt);
+    fclose(ps);
     
     if(yes>no){
         printf("Votes for Yes = %d\n",yes);
@@ -108,5 +112,6 @@ int main()
         printf("The result of voting is ABSTAIN");
         return 0; 
     }
+     
  
 }
