@@ -8,7 +8,7 @@ int main()
 	FILE *vt;
 	FILE *ps;
 	vt = fopen("votes.txt", "w");
-	ps = fopen("passwords.txt","w");
+	ps = fopen("passwords.txt","w+");
     int yes = 0;
     int no = 0;
     int abstain = 0;
@@ -43,6 +43,7 @@ int main()
                 printf("Please enter your new password: \n");
                 scanf("%d", &user_password[i]);
                 fprintf(ps, "%d\n", user_password[i]);
+                fflush(ps);
             }
             printf("Enter your vote 1 or 0 as yes or no respectively.\nIf you want to stay abstain, vote 2: ");
             scanf("%d", &vote[i]);
@@ -53,6 +54,7 @@ int main()
                 scanf("%d", &vote[i]);
             }
             fprintf(vt, "%d\n", vote[i]);
+            fflush(vt);
             getch();
             if(vote[i] == 2){
                 abstain = abstain+1;
