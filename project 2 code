@@ -60,10 +60,14 @@ int main()
             }
             if(yes>(sizeof(user_ID)/sizeof(user_ID[0]))/2){
             	printf("The result of voting is YES, because of the majority.");
+				printf("Votes for Yes = %d\n",yes);
+        		printf("Votes for No = %d\n",no);
             	return 0;
 			}
 			if(no>(sizeof(user_ID)/sizeof(user_ID[0]))/2){
 				printf("The result of voting is NO, because of the majority.");
+				printf("Votes for Yes = %d\n",yes);
+        		printf("Votes for No = %d\n",no);
 				return 0;
 			}
         }
@@ -73,6 +77,12 @@ int main()
             }
         }
     }
+    FILE *vt;
+    vt = fopen("votes.txt", "w");
+    fprintf(vt,"Yes: %d\n", yes);
+    fprintf(vt,"No: %d\n", no);
+    fprintf(vt,"Abstain: %d\n", abstain);
+    fclose(vt);
     
     if(yes>no){
         printf("Votes for Yes = %d\n",yes);
