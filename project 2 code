@@ -16,15 +16,16 @@ int main()
     int pass_change;
     int vote_change;
     long int user_ID[] = {20191706008,20191706020,20191706022};
-    int user_password[] = {321,654,987};
+    char user_password[] = {"batuhan" "aliyener" "ömer"};
+    fscanf(ps, "%s\n", user_password);
     long int user_ID_input[] = {0,0,0};
-    int user_password_input[] = {0,0,0};
+    char user_password_input[] = {"f" "f" "f"};
     int vote[] = {0,0,0};
     for(int i = 0; i < (sizeof(user_ID)/sizeof(user_ID[0])); ++i){
         printf("Please enter your ID: ");
         scanf("%ld", &user_ID_input[i]);
         printf("Please enter your password: ");
-        scanf("%d", &user_password_input[i]);
+        scanf("%s", &user_password_input[i]);
         if(i>0){
             for(int j=0; j<i; j++){
                 if(user_ID_input[i] == user_ID_input[j]){
@@ -41,8 +42,8 @@ int main()
             scanf("%d", &pass_change);
             if(pass_change == 1){
                 printf("Please enter your new password: \n");
-                scanf("%d", &user_password[i]);
-                fprintf(ps, "%d\n", user_password[i]);
+                scanf("%s", &user_password[i]);
+                fprintf(ps, "%s\n", user_password[i]);
                 fflush(ps);
             }
             printf("Enter your vote 1 or 0 as yes or no respectively.\nIf you want to stay abstain, vote 2: ");
@@ -65,7 +66,7 @@ int main()
             if(vote[i] == 0){
                 no = no+1;
             }
-            if(vote[i] != 0 && vote[i] != 1 && vote[i] != 2){
+            if(vote[i] != 1 && vote[i] != 0 && vote[i] != 2){
                 return printf("Invalid vote. \n");
             }
             if(yes>(sizeof(user_ID)/sizeof(user_ID[0]))/2){
