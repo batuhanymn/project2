@@ -7,13 +7,13 @@ int main()
 {
 	FILE *vt;
 	FILE *ps;
-	vt = fopen("votes.txt", "w");
-	ps = fopen("passwords.txt","w");
+	vt = fopen("votes.txt", "a");
+	ps = fopen("passwords.txt","a");
     int yes = 0;
     int no = 0;
     int abstain = 0;
+    int choice;
     int voted = 0;
-    int pass_change;
     int vote_change;
     long int user_ID[] = {20191706008,20191706020,20191706022};
     int user_password[] = {321, 654, 987};
@@ -37,22 +37,25 @@ int main()
             }
         }
         if(((user_ID_input[i]==user_ID[0] && user_password_input[i]==user_password[0]) || (user_ID_input[i]==user_ID[1] && user_password_input[i]==user_password[1]) || (user_ID_input[i]==user_ID[2] && user_password_input[i]==user_password[2]))&&voted==0){
-            printf("Do you want to change your password? \n");
-            scanf("%d", &pass_change);
-            if(pass_change == 1){
-                printf("Please enter your new password: \n");
+        	printf("What would you like to do? \n If you want to change your password, press 0. \n If you want to vote, press 1: \n");
+        	scanf("%d", &choice);
+        	if(choice == 0){
+        		printf("Please enter your new password: \n");
                 scanf("%d", &user_password[i]);
                 fprintf(ps, "%d\n", user_password[i]);
                 fflush(ps);
-            }
-            printf("Enter your vote 1 or 0 as yes or no respectively.\nIf you want to stay abstain, vote 2: ");
-            scanf("%d", &vote[i]);
-            printf("Are you sure?");
-            scanf("%d", &vote_change);
-            if(vote_change == 0){
-                printf("Enter your vote 1 or 0 as yes or no respectively.\nIf you want to stay abstain, vote 2: ");
-                scanf("%d", &vote[i]);
-            }
+                choice = 1;
+			}
+			if(choice == 1){
+				printf("Enter your vote 1 or 0 as yes or no respectively.\nIf you want to stay abstain, vote 2: ");
+            	scanf("%d", &vote[i]);
+            	printf("Are you sure?");
+            	scanf("%d", &vote_change);
+            	if(vote_change == 0){
+                	printf("Enter your vote 1 or 0 as yes or no respectively.\nIf you want to stay abstain, vote 2: ");
+                	scanf("%d", &vote[i]);
+            	}
+			}
             fprintf(vt, "%d\n", vote[i]);
             fflush(vt);
             getch();
