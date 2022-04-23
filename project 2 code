@@ -6,9 +6,7 @@
 int main()
 {
 	FILE *vt;
-	FILE *ps;
 	vt = fopen("votes.txt", "a");
-	ps = fopen("passwords.txt","a");
     int yes = 0;
     int no = 0;
     int abstain = 0;
@@ -16,9 +14,17 @@ int main()
     int voted = 0;
     int vote_change;
     long int user_ID[] = {20191706008,20191706020,20191706022};
-    int user_password[] = {321, 654, 987};
+    int password0, password1, password2;
+    FILE *ps;
+    ps = fopen("passwords.txt","w+");
+    fprintf(ps, "%d %d %d",321, 654, 987);
+    fseek(ps, 0, SEEK_END);
+    rewind(ps);
+    fscanf(ps, "%d", &password0);
+    fscanf(ps, "%d", &password1);
+    fscanf(ps, "%d", &password2);
     long int user_ID_input[] = {0,0,0};
-    int user_password_input[] = {0,0,0};
+    int user_password_input[] = {0, 0, 0};
     int vote[] = {0,0,0};
     for(int i = 0; i < (sizeof(user_ID)/sizeof(user_ID[0])); ++i){
         printf("Please enter your ID: ");
@@ -36,14 +42,25 @@ int main()
                 }
             }
         }
-        if(((user_ID_input[i]==user_ID[0] && user_password_input[i]==user_password[0]) || (user_ID_input[i]==user_ID[1] && user_password_input[i]==user_password[1]) || (user_ID_input[i]==user_ID[2] && user_password_input[i]==user_password[2]))&&voted==0){
+        if(((user_ID_input[i]==user_ID[0] && user_password_input[i]==password0) || (user_ID_input[i]==user_ID[1] && user_password_input[i]==password1) || (user_ID_input[i]==user_ID[2] && user_password_input[i]==password2))&&voted==0){
         	printf("What would you like to do? \n If you want to change your password, press 0. \n If you want to vote, press 1: \n");
         	scanf("%d", &choice);
         	if(choice == 0){
         		printf("Please enter your new password: \n");
-                scanf("%d", &user_password[i]);
-                fprintf(ps, "%d\n", user_password[i]);
-                fflush(ps);
+        		fseek(ps, 0, SEEK_SET);
+        		if(i==0){
+        			scanf("%d", &password0);
+        			fprintf(ps, "%d", password0);
+				}
+				if(i==1){
+        			scanf("%d", &password1);
+        			fprintf(ps, "%d", password1);
+				}
+				if(i==2){
+        			scanf("%d", &password2);
+        			fprintf(ps, "%d", password2);
+				}
+                fclose(ps);
                 choice = 1;
 			}
 			if(choice == 1){
