@@ -1,0 +1,34 @@
+//pseoudo code of the algorithm
+READ(User_ID);
+READ(User_Password);
+MATCH(User_ID and User_Password);
+FOR every user
+  SCAN(User_ID_input);
+  SCAN(User_Password_input);
+  COMPARE(User_ID and User_Password with User_ID_input and User_Password_input);
+  IF they match
+    ASK(password_change or vote);
+    IF password_change;
+      SCAN(User_Password);
+      SCAN(vote);
+    IF vote
+      SCAN(vote);
+    ASK(vote_change);
+      IF yes
+        SCAN(vote);
+  READ(vote);
+  IF yes or no > number of users/2
+    END voting;
+END FOR;
+IF yes>no
+  yes wins;
+IF no>yes
+  no wins;
+IF yes == no
+  draw;
+IF everyone abstain
+  result is abstain;
+     
+
+      
+      
